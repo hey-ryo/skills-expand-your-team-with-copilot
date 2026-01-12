@@ -74,51 +74,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Function to set day filter
-  function setDayFilter(day) {
-    currentDay = day;
-
-    // Update active class
-    dayFilters.forEach((btn) => {
-      if (btn.dataset.day === day) {
+  // Helper function to update active class on filter buttons
+  function updateActiveClass(buttons, value, dataAttr) {
+    buttons.forEach((btn) => {
+      if (btn.dataset[dataAttr] === value) {
         btn.classList.add("active");
       } else {
         btn.classList.remove("active");
       }
     });
+  }
 
+  // Function to set day filter
+  function setDayFilter(day) {
+    currentDay = day;
+    updateActiveClass(dayFilters, day, "day");
     fetchActivities();
   }
 
   // Function to set time range filter
   function setTimeRangeFilter(timeRange) {
     currentTimeRange = timeRange;
-
-    // Update active class
-    timeFilters.forEach((btn) => {
-      if (btn.dataset.time === timeRange) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-
+    updateActiveClass(timeFilters, timeRange, "time");
     fetchActivities();
   }
 
   // Function to set difficulty filter
   function setDifficultyFilter(difficulty) {
     currentDifficulty = difficulty;
-
-    // Update active class
-    difficultyFilters.forEach((btn) => {
-      if (btn.dataset.difficulty === difficulty) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-
+    updateActiveClass(difficultyFilters, difficulty, "difficulty");
     fetchActivities();
   }
 
